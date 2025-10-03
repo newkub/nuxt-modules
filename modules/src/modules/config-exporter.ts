@@ -21,33 +21,10 @@ export default defineNuxtModule({
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url);
 
-        // Provide configExporter to Nuxt app
-        nuxt.provide('configExporter', {
-            getConfigFiles: () => {
-                // Placeholder: return available config files
-                return {}
-            },
-            exportConfigFiles: exportConfigFiles
-        });
-
         // Extend Nuxt types
         nuxt.hook('prepare:types', (options) => {
             options.references.push({
                 path: resolver.resolve('./types.d.ts')
-            });
-        });
-
-        // Add TSDown plugin to build process
-        nuxt.hook('build:before', async () => {
-            // Use the TSDown plugin to export config files
-            const plugin = exportConfigFiles();
-
-            // Build with the plugin
-            await build({
-                entry: [resolver.resolve('./runtime/plugin.mjs')],
-                plugins: [plugin],
-                outDir: resolver.resolve('./dist'),
-                format: 'esm'
             });
         });
 
