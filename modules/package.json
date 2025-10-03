@@ -1,0 +1,34 @@
+{
+  "name": "modules",
+  "version": "0.1.0",
+  "description": "TSDown plugin for re-exporting config files",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "bun run src/index.ts",
+    "lint": "biome lint --write .",
+    "format": "biome format --write .",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.5",
+    "@nuxt/kit": "4.1.2",
+    "@nuxt/types": "^2.18.1",
+    "@types/bun": "^1.2.23",
+    "@types/node": "24.6.2",
+    "nuxt": "4.1.2",
+    "release-it": "^19.0.5",
+    "tsdown": "^0.15.6",
+    "typescript": "^5.9.3"
+  },
+  "module": "./dist/index.js"
+}

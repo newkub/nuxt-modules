@@ -1,0 +1,39 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "concurrency": "20",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "lint"],
+      "inputs": ["src/**/*", "modules/**/*", ".env*", "tsconfig.json", "tsdown.config.ts", "nuxt.config.ts"],
+      "outputs": ["dist/**", "build/**", ".nuxt/**", ".output/**"],
+      "cache": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["build", "^build"]
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true
+    },
+    "format": {
+      "outputs": [],
+      "cache": true
+    },
+    "clean": {
+      "cache": false,
+      "outputs": []
+    },
+    "release": {
+      "dependsOn": ["build", "lint"],
+      "outputs": []
+    },
+    "test": {
+      "outputs": [],
+      "cache": true
+    }
+  }
+}
